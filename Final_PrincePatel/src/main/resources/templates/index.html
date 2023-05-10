@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+.box {
+	padding: 100px;
+}
+</style>
+</head>
+<body>
+
+ <div class="title" style="text-align: center;">
+	<h1 >View Finalist </h1>
+
+	<h3 th:each="com : ${competitionList}">
+		<a href="#" th:onclick="'getCompetition('+ ${com.id} + ')'"
+			th:text="${com.projectName}">My Project</a>
+		<div th:id="'competition' + ${com.id}">
+		
+		</div><span><a th:href="@{/deleteById/} + ${com.id}">delete</a></span>
+		
+	</h3>
+	</div>
+	
+	
+	 <div class="container"
+		style="border: 3px solid black; width: 700px; padding: 50px;">
+		<h1 style="text-align: center;">Welcome to Competition!!</h1>
+		<h1 style="text-align: center;">Rate your project here!!!</h1>
+		<div class="box">
+			<form method="post" action="#" th:action="@{/insertCompetition}"
+				th:object="${competition}">
+				<input type="hidden" name="id" th:field="*{id}" /><br>
+				<div class="form-group">
+					ProjectName:<input class="form-control" type="text" name="projectName"
+						th:field="*{projectName}" />
+				</div>
+				<div class="form-group">
+					Add Description:<input class="form-control" type="text" name="description"
+						th:field="*{description}" />
+				</div>
+				<div class="form-group">
+					developer:<input class="form-control" type="text" name="developer"
+						th:field="*{developer}" />
+				</div>
+				<div class="form-group">
+					Rate:<input class="form-control" type="number" name="rate"
+						th:field="*{rate}">
+				</div>
+				<input type="submit" value="Go!" />
+			</form>
+			<br>
+
+	</div> 
+	
+</body>
+</html>
